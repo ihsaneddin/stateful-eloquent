@@ -125,7 +125,10 @@ trait StatefulTrait
      * @return mixed
      */
     protected function updateState($state) {
-        return $this->update([$this->getStateColumn() => $state]);
+        #return $this->update([$this->getStateColumn() => $state]);
+        #to allow save state without having set to fillable
+        $this->{$this->getStateColumn()} = $state;
+        return $this->save();
     }
 
     /**
